@@ -16,7 +16,14 @@ docker-compose logs -f
 <!-- DOWN ANY EXISTING CONTAINERS -->
 - docker-compose down -v 
 
-## PROD : (CHANTIER EN COURS)
+## PROD :
+#### Déployer sur un domaine avec utilisation d'un DNS, site accesible par ces liens si pas de probleme lors du docker-compose de la PROD. Possible problème avec le site car il est en version gratuite et donc peut être qui ne sera plus accesible à un moment
+<!-- Lien du site -->
+fastapi-traefik.fastapi-traefik-gamebase.gq
+
+<!-- Lien du dashboard -->
+dashboard-fastapi-traefik.fastapi-traefik-gamebase.gq
+
 <!-- BUILD PROD -->
 - docker-compose -f docker-compose.prod.yml up -d --build
 
