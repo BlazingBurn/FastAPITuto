@@ -16,7 +16,7 @@ docker-compose logs -f
 <!-- DOWN ANY EXISTING CONTAINERS -->
 - docker-compose down -v 
 
-## PROD :
+## PROD : (CHANTIER EN COURS)
 <!-- BUILD PROD -->
 - docker-compose -f docker-compose.prod.yml up -d --build
 
