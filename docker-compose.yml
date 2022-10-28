@@ -1,0 +1,43 @@
+# docker-compose.yml
+
+version: '3.8'
+
+services:
+  web:
+    build: .
+    # Wait until postgresl is up. Once up uvicorn is run
+    command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; uvicorn sandBox:app --host 0.0.0.0'
+    volumes:
+      - .:/app
+    expose:  # traefik
+      - 8000
+    environment:
+      - DATABASE_URL=postgresql://fastapi_traefik:fastapi_traefik@db:5432/fastapi_traefik
+    depends_on:
+      - db
+    labels: # enable traefik to discover the service and redirection to this service
+      - "traefik.enable=true"
+      - "traefik.http.routers.fastapi.rule=Host(`fastapi.localhost`)"
+  
+  db:
+    image: postgres:13-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    expose:
+      - 5432
+    environment:
+      - POSTGRES_USER=fastapi_traefik
+      - POSTGRES_PASSWORD=fastapi_traefik
+      - POSTGRES_DB=fastapi_traefik
+  
+  traefik: # new
+    image: traefik:v2.2
+    ports:
+      - 8008:80
+      - 8081:8080
+    volumes:
+      - "./traefik/traefik.dev.toml:/etc/traefik/traefik.toml" # maps the local config file to the config file in the container so that the settings are kept in sync
+      - "/var/run/docker.sock:/var/run/docker.sock:ro" # enables Traefik to discover other containers
+
+volumes:
+  postgres_data:
