@@ -42,3 +42,6 @@ http://fastapi.localhost:8008/
 <!-- DASHBOARD TRAEFIK -->
 http://fastapi.localhost:8081/dashboard/#/
 
+<!-- LIEN POUR LA PROD -->
+https://fastapi-traefik.fastapi-traefik-gamebase.gq/
+
