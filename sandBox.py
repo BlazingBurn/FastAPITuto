@@ -1,4 +1,7 @@
-from fastapi import Body, FastAPI, Path, Query
+from fastapi import Body, FastAPI, Path, Query, Request
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel, Field
 from Enum.rankenum import Rank
 from db import database, Player, Group
@@ -6,25 +9,19 @@ from db import database, Player, Group
 
 app = FastAPI(title="FastAPI, Docker, and Traefik")
 
-# class Player(BaseModel):
-#     id: int
-#     username: str
-#     level: int 
-#     gold: int | None = None
-#     rank: Rank
-    
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
-# class Group(BaseModel):
-#     name: str
-#     description: str | None = None
-#     powerRank: int
-
+templates = Jinja2Templates(directory="templates")
 
 # ---------------------------- BASIC SET UP ----------------------------
 
-@app.get("/")
-async def read_root():
-    return await Player.objects.all()
+@app.get("/", response_class=HTMLResponse)
+async def read_root(request: Request):
+    pl = await Player.objects.all()
+    strList = []
+    for player in pl:
+        strList.append(f'Le joueur {player["username"]} possedant l\'id : {player["id"]} est au niveau {player["level"]} et possede le rank de "{player["rank"]}".')
+    return templates.TemplateRespose("index.html", {"request": request, "playerList":pl})
 
 
 @app.on_event("startup")

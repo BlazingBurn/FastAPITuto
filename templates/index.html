@@ -1,0 +1,16 @@
+<html>
+<head>
+    <title>Accueil</title>
+    <link href="{{ url_for('static', path='/stylesSandBox.css') }}" rel="stylesheet">
+</head>
+<body>
+    <h1>Listes des joueurs : </h1>
+
+    <ul>
+        {% for player in playerList: %}      
+                <li>{{ player }}</li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
