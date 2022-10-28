@@ -18,10 +18,11 @@ templates = Jinja2Templates(directory="templates")
 @app.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
     pl = await Player.objects.all()
-    strList = []
-    for player in pl:
-        strList.append(f'Le joueur {player["username"]} possedant l\'id : {player["id"]} est au niveau {player["level"]} et possede le rank de "{player["rank"]}".')
-    return templates.TemplateRespose("index.html", {"request": request, "playerList":pl})
+    # strList = []
+    # # for player in pl:
+    # #     strList.append(player["username"])
+    # #     # strList.append(f'Le joueur {player["username"]} possedant l\'id : {player["id"]} est au niveau {player["level"]} et possede le rank de "{player["rank"]}".')
+    return templates.TemplateResponse("index.html", {"request": request, "playerList":pl})
 
 
 @app.on_event("startup")
