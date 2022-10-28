@@ -1,0 +1,21 @@
+# traefik.dev.toml
+
+# listen on port 80
+[entryPoints]
+  [entryPoints.web]
+    address = ":80"
+
+# Traefik dashboard over http
+[api]
+insecure = true
+
+[log]
+level = "DEBUG"
+
+[accessLog]
+
+# containers are not discovered automatically : don't expose db service
+# add "traefik.enable=true" to docker compose file if want expose service
+[providers]
+  [providers.docker]
+    exposedByDefault = false
