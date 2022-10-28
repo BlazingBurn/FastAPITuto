@@ -17,7 +17,7 @@ docker-compose logs -f
 - docker-compose down -v 
 
 ## PROD :
-<!-- Déployer sur un domaine avec utilisation DNS accesible par ce lien si pas de probleme lors du docker-compose de la PROD -->
+#### Déployer sur un domaine avec utilisation d'un DNS, site accesible par ces liens si pas de probleme lors du docker-compose de la PROD. Possible problème avec le site car il est en version gratuite et donc peut être qui ne sera plus accesible à un moment
 <!-- Lien du site -->
 fastapi-traefik.fastapi-traefik-gamebase.gq
 
