@@ -17,6 +17,13 @@ docker-compose logs -f
 - docker-compose down -v 
 
 ## PROD :
+<!-- Déployer sur un domaine avec utilisation DNS accesible par ce lien si pas de probleme lors du docker-compose de la PROD -->
+<!-- Lien du site -->
+fastapi-traefik.fastapi-traefik-gamebase.gq
+
+<!-- Lien du dashboard -->
+dashboard-fastapi-traefik.fastapi-traefik-gamebase.gq
+
 <!-- BUILD PROD -->
 - docker-compose -f docker-compose.prod.yml up -d --build
 
